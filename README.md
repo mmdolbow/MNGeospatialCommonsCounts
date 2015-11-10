@@ -1,0 +1,1 @@
+This is a repo for demonstrating how to use the CKAN API to obtain general counts from a CKAN site, using the MN Geospatial Commons (gisdata.mn.gov) as the subject.
