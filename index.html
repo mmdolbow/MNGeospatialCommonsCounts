@@ -12,13 +12,17 @@
 		<meta name="author" content="Mike Dolbow" />
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
-
-		<!--jquery bootstraps -->
+		<!--jquery src -->
 	    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/hot-sneaks/jquery-ui.css">
 		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-	    <!-- Main Script Bootstrap -->
+	    <!--Bootstrap src-->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<link rel="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+	    <!-- Main Script src -->
 	    <script src="js/app.js"></script>
 	</head>
 
@@ -41,12 +45,23 @@
 			
 				Organizations and resource count are below:</br> <em id="resultsEm"></em>
 				</p>
+				<!-- Use this for a bootstrap table when ready
+				<table id="table" class="table">
+				    <thead>
+				        <tr>
+				        <th data-field="display_name" data-sortable="true">Org</th>
+				        <th data-field="package_count" data-sortable="true">Count</th>
+				        </tr>
+				     </thead>
+				</table>
+				-->
 			</div>
 
 
 			<footer>
 				<p>
-					Written by Mike Dolbow, with lots of help from the interwebs. <a href="https://twitter.com/mmdolbow">@mmdolbow</a>
+					Written by Mike Dolbow, with lots of help from the interwebs. <a href="https://twitter.com/mmdolbow">@mmdolbow</a> <br />
+					Relies on CDN sources of <a href="http://jquery.com">JQuery</a> and <a href="http://getbootstrap.com/">Bootstrap</a>. If those CDNs are down, this page bombs. Bummer.
 				</p>
 			</footer>
 		</div>
