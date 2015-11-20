@@ -29,7 +29,6 @@ function writeResources(){
 	
 	  });
 	
-	
 	//Request 2: get the package count per org
 	//Here's the main request: https://gisdata.mn.gov/api/3/action/organization_list?all_fields=true&sort=package_count
     $.ajax({
@@ -43,27 +42,20 @@ function writeResources(){
         }
       })
 	  .done(function( data ) {
-		console.log("Querying "+url1);
+		console.table(data.result);
 		$("#requestEm").append("<p>There are now <strong>"+data.result.length+"<\/strong> publishers on the MN Geospatial Commons.<\/p>");
+	    /* First version, simple text display of numbers
 	    if ( console && console.log ) {
           $.each(data.result, function (i) { //resources returned
               //show some results
               //console.log("Display Name: "+data.result[i].display_name);
               $("#resultsEm").append(data.result[i].display_name+"<strong>: "+data.result[i].package_count+"<\/strong><br>");
            });
-	    }
-
-	  });
-		//attempt to load into a bootstrap table
-	    $('#table').bootstrapTable({
-		    //data: data //theoretically this would work if embedded in the done section above
-		    url: 'https://gisdata.mn.gov/api/3/action/organization_list?all_fields=true&sort=package_count',
-		    columns: [{
-		       field: 'display_name',
-		       title: 'Org'
-		       },
-		       {field: 'package_count',
-		        title: 'Count'
-		       } ]
+	    } */
+	    
+		$('#table').bootstrapTable({
+			data: data.result
 		});
+		$('#table').bootstrapTable('hideLoading');
+	  });
 } //end page load function

@@ -4,7 +4,7 @@ HAS:
 - Basic total package (resource) count
 - Count of organizations (publishers)
 - List of publishers with a count of their total resources
+- Decent Bootstrap table style
 
 NEEDS:
-- Better styling
-- Org/count list in a friendly table
+- Sorting of bootstrap table
