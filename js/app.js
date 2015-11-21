@@ -42,7 +42,7 @@ function writeResources(){
         }
       })
 	  .done(function( data ) {
-		console.table(data.result);
+		//console.table(data.result); //use only when debugging...it kills the page in IE
 		$("#requestEm").append("<p>There are now <strong>"+data.result.length+"<\/strong> publishers on the MN Geospatial Commons.<\/p>");
 	    /* First version, simple text display of numbers
 	    if ( console && console.log ) {
