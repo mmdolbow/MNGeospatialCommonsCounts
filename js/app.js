@@ -68,7 +68,7 @@ function writeResources(){
 		//$("#newResourcesEm").append(data.result.length);
           $.each(data.result, function (i) { //resources returned
              if (data.result[i].activity_type === "new package") {
-             	var recentHTML = '<a target=\"_blank" href=\"http:\/\/gisdata.mn.gov\/dataset\/'+data.result[i].data.package.name+'\">'+data.result[0].data.package.title+'<\/a>';
+             	var recentHTML = '<a target=\"_blank" href=\"http:\/\/gisdata.mn.gov\/dataset\/'+data.result[i].data.package.name+'\">'+data.result[i].data.package.title+'<\/a>';
                 $("#newResourcesEm").append(recentHTML+'<br\/>');
              }
           });
