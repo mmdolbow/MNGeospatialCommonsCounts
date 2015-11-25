@@ -1,5 +1,6 @@
 /**
  * @author Mike Dolbow
+ * 
  */
 
 function writeResources(){
@@ -7,14 +8,12 @@ function writeResources(){
  
     if (dev) {
     	var url1 = 'http://demo.ckan.org/api/3/action/package_list';
+    	var url2 = 'http://demo.ckan.org/api/3/action/organization_list?';
+    	var url3 = 'http://demo.ckan.org/api/3/action/recently_changed_packages_activity_list';
     } else {
-    	var url1 ='https://gisdata.mn.gov/api/3/action/package_list';
-    }
-    
-    if (dev) {
-    	var url2 = 'http://demo.ckan.org//api/3/action/organization_list?';
-    } else {
-    	var url2 ='https://gisdata.mn.gov/api/3/action/organization_list?';
+    	var url1 = 'https://gisdata.mn.gov/api/3/action/package_list';
+    	var url2 = 'https://gisdata.mn.gov/api/3/action/organization_list?';
+    	var url3 = 'https://gisdata.mn.gov/api/3/action/recently_changed_packages_activity_list';
     }
 
 	//PUT the AJAX requests in these functions
@@ -57,5 +56,22 @@ function writeResources(){
 			data: data.result
 		});
 		$('#table').bootstrapTable('hideLoading');
+	  });
+	  
+	//Request 3: get the recent changes
+	$.ajax({
+        url: url3,
+        dataType: "jsonp",
+        cache: "false"
+        })
+	  .done(function( data ) {
+		//$("#newResourcesEm").append(data.result.length);
+          $.each(data.result, function (i) { //resources returned
+             if (data.result[i].activity_type === "new package") {
+             	var recentHTML = '<a target=\"_blank" href=\"http:\/\/gisdata.mn.gov\/dataset\/'+data.result[i].data.package.name+'\">'+data.result[0].data.package.title+'<\/a>';
+                $("#newResourcesEm").append(recentHTML+'<br\/>');
+             }
+          });
+	
 	  });
 } //end page load function
