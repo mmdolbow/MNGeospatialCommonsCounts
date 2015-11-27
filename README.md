@@ -5,7 +5,8 @@ HAS:
 - Count of organizations (publishers)
 - List of publishers with a count of their total resources
 - Decent Bootstrap table style
-- List and link of ecently created resources at the bottom
+- List and link of recently created resources at the bottom
 
 NEEDS:
 - Sorting of bootstrap table
+- More responsive style for larger screens
