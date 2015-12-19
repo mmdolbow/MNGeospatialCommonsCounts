@@ -10,10 +10,12 @@ function writeResources(){
     	var url1 = 'http://demo.ckan.org/api/3/action/package_list';
     	var url2 = 'http://demo.ckan.org/api/3/action/organization_list?';
     	var url3 = 'http://demo.ckan.org/api/3/action/recently_changed_packages_activity_list';
+    	var url4 = 'http://demo.ckan.org/api/3/action/package_search?ext_bbox=-97,25,-80,55'
     } else {
     	var url1 = 'https://gisdata.mn.gov/api/3/action/package_list';
     	var url2 = 'https://gisdata.mn.gov/api/3/action/organization_list?';
     	var url3 = 'https://gisdata.mn.gov/api/3/action/recently_changed_packages_activity_list';
+    	var url4 = 'https://gisdata.mn.gov/api/3/action/package_search?ext_bbox=-419967,4924223,-521254,5029009'
     }
 
 	//PUT the AJAX requests in these functions
@@ -65,13 +67,34 @@ function writeResources(){
         cache: "false"
         })
 	  .done(function( data ) {
-		//$("#newResourcesEm").append(data.result.length);
+		var counter = 0;
           $.each(data.result, function (i) { //resources returned
              if (data.result[i].activity_type === "new package") {
              	var recentHTML = '<a target=\"_blank" href=\"http:\/\/gisdata.mn.gov\/dataset\/'+data.result[i].data.package.name+'\">'+data.result[i].data.package.title+'<\/a>';
                 $("#newResourcesEm").append(recentHTML+'<br\/>');
+                counter ++;
              }
           });
-	
+		if (counter === 0) {
+			console.log("emptying");
+			$("#newResourcesEm").empty();
+		} 
+	  });
+	  
+	//Request 4: get any resources with bad bounding boxes
+	$.ajax({
+        url: url4,
+        dataType: "jsonp",
+        cache: "false"
+        })
+	  .done(function( data ) {
+        if (data.result.count>0) {  
+          $.each(data.result.results, function (n) { //resources returned
+             	var badbboxHTML = '<a target=\"_blank" href=\"http:\/\/gisdata.mn.gov\/dataset\/'+data.result.results[n].name+'\">'+data.result.results[n].title+'<\/a>';
+                $("#badbboxResourcesEm").append(badbboxHTML+'<br\/>');
+          });
+	    } else {
+	    	$("#badbboxResourcesEm").empty();
+	    } //end if no results are greater than 0
 	  });
 } //end page load function
