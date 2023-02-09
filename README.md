@@ -16,4 +16,5 @@ NEEDS:
 2015-11-24: links to recently created resources
 2015-12-19: code to detect bad bounding boxes
 2017-04-25: style updates
-2023-02-09: larger list of resources used when searching for recently created resources
+2023-02-09: larger list of resources used when searching for recently created resources.
+            Proof-of-concept page new_resources.html added for looping through changed package list until X number of new packages found
