@@ -14,7 +14,10 @@ function writeResources(){
     } else {
     	var url1 = 'https://gisdata.mn.gov/api/3/action/package_list';
     	var url2 = 'https://gisdata.mn.gov/api/3/action/organization_list?';
-    	var url3 = 'https://gisdata.mn.gov/api/3/action/recently_changed_packages_activity_list';
+    	//default only returns ~30 results
+		//var url3 = 'https://gisdata.mn.gov/api/3/action/recently_changed_packages_activity_list';
+		//high limit is slow - ideally would paginate until you found 5 results or something like that
+		var url3 = 'https://gisdata.mn.gov/api/3/action/recently_changed_packages_activity_list?limit=150';
     	var url4 = 'https://gisdata.mn.gov/api/3/action/package_search?ext_bbox=-419967,4924223,-521254,5029009'
     }
 
@@ -60,7 +63,10 @@ function writeResources(){
 		$('#table').bootstrapTable('hideLoading');
 	  });
 	  
-	//Request 3: get the recent changes
+	/*Request 3: get the recent changes. Note the default get appears to only get the most recent 31, which is probably
+	why we don't often see "new" ones show up - there are too many modified on the Commons each day that appear here. We have to page through to 90 to find a new one
+	We might want to try current_package_list_with_resources, which is naturally sorted by most recently modified, and a limit param can be passed
+	*/ 
 	$.ajax({
         url: url3,
         dataType: "jsonp",
