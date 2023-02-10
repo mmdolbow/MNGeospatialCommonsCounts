@@ -3,7 +3,7 @@
  * 
  */
 
-function writeResources(){
+function writeNewResources(){
     var dev=false; //set to true to use the CKAN demo site, false to use the MN Geospatial Commons
  
     if (dev) {
@@ -23,6 +23,7 @@ function writeResources(){
 	/*Request get the recent changes.
 	*/ 
 	function recentAPILook(){
+        $('#newResourceDiv').append("<ul id='newResourceList'></ul>");
         $.ajax({
             url: urlRecentChg+"?limit="+ajaxLimit+"&offset="+ajaxOffset,
             dataType: "jsonp",
@@ -31,8 +32,12 @@ function writeResources(){
           .done(function( data ) {
               $.each(data.result, function (i) { //resources returned
                  if (data.result[i].activity_type === "new package") {
-                     var recentHTML = '<a target=\"_blank" href=\"http:\/\/gisdata.mn.gov\/dataset\/'+data.result[i].data.package.name+'\">'+data.result[i].data.package.title+'<\/a>';
-                    $("#newResourcesEm").append(recentHTML+'<br\/>');
+                    var pckgTimeStamp = data.result[i].timestamp;
+                    var createDateStamp = new Date(pckgTimeStamp).toLocaleDateString();
+                    var recentHTML = '<a target=\"_blank" href=\"http:\/\/gisdata.mn.gov\/dataset\/'+data.result[i].data.package.name+'\">'+data.result[i].data.package.title+'<\/a>';
+                    recentHTML += ' (Created '+createDateStamp+")"; //data.result[i].timestamp;
+                    //$("#newResourcesEm").append(recentHTML+'<br\/>');
+                    $("#newResourceList").append("<li>"+recentHTML+"</li>");
                     newResCount ++;
                  }
               });
