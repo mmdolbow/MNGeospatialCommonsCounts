@@ -23,7 +23,10 @@ function writeNewResources(){
 	/*Request get the recent changes.
 	*/ 
 	function recentAPILook(){
-        $('#newResourceDiv').append("<ul id='newResourceList'></ul>");
+        if (ajaxOffset === 0) {
+            console.log("First time through, setting up the unordered list.")
+            $('#newResourceDiv').append("<ul id='newResourceList'></ul>");
+        }
         $.ajax({
             url: urlRecentChg+"?limit="+ajaxLimit+"&offset="+ajaxOffset,
             dataType: "jsonp",
@@ -36,7 +39,6 @@ function writeNewResources(){
                     var createDateStamp = new Date(pckgTimeStamp).toLocaleDateString();
                     var recentHTML = '<a target=\"_blank" href=\"http:\/\/gisdata.mn.gov\/dataset\/'+data.result[i].data.package.name+'\">'+data.result[i].data.package.title+'<\/a>';
                     recentHTML += ' (Created '+createDateStamp+")"; //data.result[i].timestamp;
-                    //$("#newResourcesEm").append(recentHTML+'<br\/>');
                     $("#newResourceList").append("<li>"+recentHTML+"</li>");
                     newResCount ++;
                  }
@@ -45,7 +47,7 @@ function writeNewResources(){
                 console.log("Reached our limit, stopping");
                 //$("#newResourcesEm").empty();
             } else {
-                console.log("none found yet, trying again.")
+                console.log("none found yet or not yet at our limit, trying again.")
                 ajaxOffset = ajaxOffset + ajaxLimit;
                 recentAPILook();
             }
