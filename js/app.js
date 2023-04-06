@@ -78,7 +78,8 @@ function writeResources(){
 	    	$("#badbboxResourcesEm").empty();
 	    } //end if no results are greater than 0
 	  });
-} //end page load function
 
 //fire off the new resources write
 writeNewResources();
+
+} //end page load function
